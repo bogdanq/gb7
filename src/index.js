@@ -35,7 +35,7 @@ const Info = ({ title }) => {
   // const { title } = props;
 
   return (
-    <div>
+    <div className="test" style={{ border: "1px solid blue" }}>
       <h1>Hello from {title}</h1>
       <h2>age: {age}</h2>
       <h2>name: {obj.name}</h2>
