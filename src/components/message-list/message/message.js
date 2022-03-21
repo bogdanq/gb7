@@ -1,7 +1,9 @@
+import { memo } from "react";
 import cls from "classnames";
 import styles from "./message.module.css";
 
-export function Message({ message }) {
+export const Message = memo(({ message }) => {
+  console.log("render");
   return (
     <div
       className={cls(styles.message, {
@@ -13,4 +15,4 @@ export function Message({ message }) {
       <p>{message.date}</p>
     </div>
   );
-}
+});

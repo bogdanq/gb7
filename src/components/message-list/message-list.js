@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { Input, InputAdornment } from "@mui/material";
+// import PropTypes from "prop-types";
 import { Send } from "@mui/icons-material";
 import { Message } from "./message";
 import { useStyles } from "./use-styles";
 
-export function MessageList() {
+export const MessageList = () => {
   const [value, setValue] = useState("");
   const [messages, setMessages] = useState([
     {
       author: "Bot",
-      message: "message 1",
-      date: new Date().toLocaleDateString(),
+      message: "message 333",
+      date: "date",
     },
   ]);
 
@@ -61,8 +62,8 @@ export function MessageList() {
   return (
     <>
       <div>
-        {messages.map((message) => (
-          <Message message={message} />
+        {messages.map((message, index) => (
+          <Message message={message} key={message.date} />
         ))}
       </div>
 
@@ -81,4 +82,12 @@ export function MessageList() {
       />
     </>
   );
-}
+};
+
+// MessageList.propTypes = {
+//   test1: PropTypes.string.isRequired,
+//   test2: PropTypes.bool.isRequired,
+//   test3: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//   }).isRequired,
+// };
