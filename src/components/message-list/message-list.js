@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Input, InputAdornment } from "@mui/material";
 // import PropTypes from "prop-types";
 import { Send } from "@mui/icons-material";
@@ -6,6 +6,8 @@ import { Message } from "./message";
 import { useStyles } from "./use-styles";
 
 export const MessageList = () => {
+  const ref = useRef();
+
   const [value, setValue] = useState("");
   const [messages, setMessages] = useState([
     {
@@ -16,6 +18,10 @@ export const MessageList = () => {
   ]);
 
   const styles = useStyles();
+
+  // useEffect(() => {
+  //   console.log("ref", ref);
+  // }, []);
 
   const sendMessage = () => {
     if (value) {
@@ -61,7 +67,7 @@ export const MessageList = () => {
 
   return (
     <>
-      <div>
+      <div ref={ref}>
         {messages.map((message, index) => (
           <Message message={message} key={message.date} />
         ))}
