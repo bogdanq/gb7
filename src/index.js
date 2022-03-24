@@ -21,9 +21,9 @@ const App = () => {
 
 const theme = createTheme({
   palette: {
-    // primary: {
-    //   // main: "#ff0000",
-    // },
+    primary: {
+      main: "#17212b",
+    },
   },
   breakpoints: {
     keys: ["lg", "sm"],
