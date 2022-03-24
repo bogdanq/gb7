@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 import { Input, InputAdornment } from "@mui/material";
 // import PropTypes from "prop-types";
 import { Send } from "@mui/icons-material";
@@ -7,32 +8,40 @@ import { useStyles } from "./use-styles";
 
 export const MessageList = () => {
   const ref = useRef();
+  const { roomId } = useParams();
 
   const [value, setValue] = useState("");
-  const [messages, setMessages] = useState([
-    {
-      author: "Bot",
-      message: "message 333",
-      date: "date",
-    },
-  ]);
+  const [messageList, setMessageList] = useState({
+    room1: [
+      {
+        author: "Bot",
+        message: "message 333",
+        date: "date",
+      },
+    ],
+  });
 
   const styles = useStyles();
 
-  // useEffect(() => {
-  //   console.log("ref", ref);
-  // }, []);
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollTo(0, ref.current.scrollHeight);
+    }
+  }, [messageList]);
 
   const sendMessage = () => {
     if (value) {
-      setMessages([
-        ...messages,
-        {
-          author: "User",
-          message: value,
-          date: new Date().toLocaleDateString(),
-        },
-      ]);
+      setMessageList({
+        ...messageList,
+        [roomId]: [
+          ...(messageList[roomId] ?? []),
+          {
+            author: "User",
+            message: value,
+            date: new Date(),
+          },
+        ],
+      });
       setValue("");
     }
   };
@@ -44,26 +53,33 @@ export const MessageList = () => {
   };
 
   useEffect(() => {
-    const lastMessages = messages[messages.length - 1];
+    const messages = messageList[roomId] ?? [];
+    const lastMessage = messages[messages.length - 1];
     let timerId = null;
 
-    if (messages.length && lastMessages.author === "User") {
+    if (messages.length && lastMessage.author === "User") {
       timerId = setTimeout(() => {
-        setMessages([
-          ...messages,
-          {
-            author: "Bot",
-            message: "hello from bot",
-            date: new Date().toLocaleDateString(),
-          },
-        ]);
+        // @TODO сделать в функции sendMessage
+        setMessageList({
+          ...messageList,
+          [roomId]: [
+            ...(messageList[roomId] ?? []),
+            {
+              author: "Bot",
+              message: "Hello from Bot",
+              date: new Date(),
+            },
+          ],
+        });
       }, 500);
     }
 
     return () => {
       clearInterval(timerId);
     };
-  }, [messages]);
+  }, [messageList, roomId]);
+
+  const messages = messageList[roomId] ?? [];
 
   return (
     <>
