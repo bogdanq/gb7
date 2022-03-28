@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -9,6 +10,7 @@ import {
   Box,
   AppBar,
 } from "@mui/material";
+import { ThemeContext } from "../../theme-context";
 import styles from "./header.module.css";
 
 const menu = [
@@ -18,6 +20,8 @@ const menu = [
 ];
 
 export function Header() {
+  const { themeSetter, theme } = useContext(ThemeContext);
+
   return (
     <AppBar position="static" color="primary" className={styles.appBar}>
       <Container maxWidth="xl">
@@ -45,6 +49,9 @@ export function Header() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <button onClick={() => themeSetter("light")}>light</button>
+            <button onClick={() => themeSetter("dark")}>dark</button>
+            <span style={{ color: theme.theme.color }}>{theme.name}</span>
             <IconButton sx={{ p: 0 }}>
               <Avatar />
             </IconButton>
