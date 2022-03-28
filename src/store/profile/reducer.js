@@ -7,6 +7,7 @@ const initialState = {
 };
 
 export const profileReducer = (state = initialState, action) => {
+  // action.payload
   switch (action.type) {
     case TOGGLE_VISIBLE_PROFILE:
       return { ...state, isVisibleProfile: !state.isVisibleProfile };
