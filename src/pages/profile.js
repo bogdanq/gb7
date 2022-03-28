@@ -4,7 +4,7 @@ import { toggleVisibleProfile } from "../store/profile";
 export const ProfilePage = () => {
   const dispatch = useDispatch();
   const { firstName, lastName, isVisibleProfile } = useSelector(
-    (state) => state
+    (state) => state.profile
   );
 
   return (
