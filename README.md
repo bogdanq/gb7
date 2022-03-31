@@ -41,7 +41,7 @@ dispatch(actionCreator("Hello"));
 dispatch({ type: "SEND_MESSAGE", payload: "Hello" });
 
 // - запускает редюсер
-// - запускает подсчиков (react components)
+// - запускает подсчиков (react components) (useSelector, connect)
 ```
 
 // reducer
@@ -57,4 +57,13 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+// {
+//   INCREMENT: (state, payload) => ({}),
+//   INCREMENT: () => ({}),
+//   INCREMENT: () => ({}),
+//   INCREMENT: () => ({}),
+//   INCREMENT: () => ({}),
+//   INCREMENT: () => ({}),
+// }
 ```
