@@ -6,7 +6,7 @@ import { Input, InputAdornment } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { Message } from "./message";
 import { useStyles } from "./use-styles";
-import { sendMessage, messagesSelector } from "../../store/messages";
+import { sendMessageWithBot, messagesSelector } from "../../store/messages";
 import { usePrevios } from "../../hooks/use-previos";
 
 export const MessageList = () => {
@@ -33,7 +33,10 @@ export const MessageList = () => {
   const send = useCallback(
     (message, author = "User") => {
       if (message) {
-        dispatch(sendMessage(roomId, { author: author || "Bot", message }));
+        dispatch(
+          sendMessageWithBot(roomId, { author: author || "Bot", message })
+        );
+
         setValue("");
       }
     },
