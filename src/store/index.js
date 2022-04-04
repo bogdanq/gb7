@@ -5,7 +5,12 @@ import thunk from "redux-thunk";
 import { profileReducer } from "./profile";
 import { conversationsReducer } from "./conversations";
 import { messagesReducer } from "./messages";
-import { logger, botMessage, timeScheduler } from "./middlewares";
+import {
+  logger,
+  botMessage,
+  timeScheduler,
+  crashReporter,
+} from "./middlewares";
 // import { createStore } from "./my-redux";
 
 const persistConfig = {
@@ -24,7 +29,7 @@ const reducer = combineReducers({
 export const store = createStore(
   persistReducer(persistConfig, reducer),
   compose(
-    applyMiddleware(thunk, logger, botMessage, timeScheduler),
+    applyMiddleware(crashReporter, thunk, logger, botMessage, timeScheduler),
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : (args) => args
