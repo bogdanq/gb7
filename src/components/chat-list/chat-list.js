@@ -41,7 +41,7 @@ export function ChatList() {
       {conversations.map((chat, index) => (
         <div style={{ display: "flex" }} key={index}>
           <Button color="info" onClick={() => deleteCb(chat)}>
-            X
+            x
           </Button>
           <Link to={`/chat/${chat}`}>
             <Chat title={chat} selected={roomId === chat} />

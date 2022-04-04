@@ -1,4 +1,4 @@
-import nanoid from "nanoid";
+import { nanoid } from "nanoid";
 import { SEND_MESSAGE, DELETE_MESSAGE } from "./types";
 
 const initialState = {

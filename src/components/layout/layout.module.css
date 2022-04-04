@@ -1,7 +1,8 @@
 .body {
   background: gray;
   width: 100%;
-  height: 100%;
+  /* @TODO исправить высоту */
+  height: calc(100% - 69px);
   display: flex;
   flex-direction: column;
 }

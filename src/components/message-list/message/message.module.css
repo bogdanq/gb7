@@ -8,6 +8,8 @@
   font-size: 14px;
   line-height: 1.5;
   word-break: break-all;
+  display: flex;
+  justify-content: space-between;
 }
 
 .currentMessage {
