@@ -13,7 +13,7 @@ export function ChatList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const conversations = useSelector(conversationsSelector);
+  const { conversations, pending } = useSelector(conversationsSelector);
 
   const create = () => {
     const name = prompt("Введите название комнаты");
@@ -30,6 +30,11 @@ export function ChatList() {
     dispatch(deleteConversation(conversation));
     navigate("/chat");
   };
+
+  // @TODO сделат верстку
+  if (pending) {
+    return <h1>pending ...</h1>;
+  }
 
   return (
     <List component="nav">
