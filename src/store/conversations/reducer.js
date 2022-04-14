@@ -3,6 +3,9 @@ import {
   GET_CONVERSATIONS_SUCCESS,
   GET_CONVERSATIONS_START,
   GET_CONVERSATIONS_ERROR,
+  CREATE_CONVERSATION_START,
+  CREATE_CONVERSATION_SUCCESS,
+  CREATE_CONVERSATION_ERROR,
 } from "./types";
 import { DELETE_CONVERSATION } from "../types";
 
@@ -10,6 +13,8 @@ const initialState = {
   conversations: [],
   pending: false,
   error: null,
+  createConversationPending: false,
+  createConversationError: null,
 };
 
 export const conversationsReducer = (state = initialState, action) => {
@@ -32,6 +37,25 @@ export const conversationsReducer = (state = initialState, action) => {
       return { ...state, pending: false, conversations: action.payload };
     case GET_CONVERSATIONS_ERROR:
       return { ...state, pending: false, error: action.payload };
+
+    case CREATE_CONVERSATION_START:
+      return {
+        ...state,
+        createConversationPending: true,
+        createConversationError: null,
+      };
+    case CREATE_CONVERSATION_SUCCESS:
+      return {
+        ...state,
+        createConversationPending: false,
+        conversations: [action.payload, ...state.conversations],
+      };
+    case CREATE_CONVERSATION_ERROR:
+      return {
+        ...state,
+        createConversationPending: false,
+        createConversationError: action.payload,
+      };
     default:
       return state;
   }

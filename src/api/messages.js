@@ -8,3 +8,5 @@ export const createMessageApi = (message, roomId) => {
 export const getMessagesApi = () => {
   return get(child(ref(database), `messages`));
 };
+
+// @TODO - сделать запрос удаления
